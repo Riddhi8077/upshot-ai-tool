@@ -1,0 +1,424 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* UpshotX Design System - AI-powered LinkedIn Post Generator
+All colors MUST be HSL. Modern purple-blue gradient theme.
+*/
+
+/* ---------- Input/UI color override (force white inputs) ---------- */
+/* Applies to native inputs and common component wrappers */
+input,
+textarea,
+select,
+.shadcn-input,
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  background-color: #ffffff !important;
+  color: #0b0b0b !important;
+  border-color: rgba(0,0,0,0.1) !important;
+  caret-color: #000 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important; /* placeholder gray */
+}
+
+/* If your shadcn Input uses an inner input, target that too */
+input[class*="Input"],
+input[class*="input"] {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+/* Fix Radix UI dropdown background */
+[data-radix-popper-content-wrapper] {
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+  border: 1px solid #333 !important;
+}
+
+/* FIX: Make all shadcn inputs visible */
+input, textarea, select,
+div[data-slot="control"],
+div[data-radix-popper-content-wrapper] {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+svg, button, label, span {
+  color: #fff !important;
+}
+
+@layer base {
+  :root {
+    /* Base colors */
+    --background: 240 10% 4%;
+    --foreground: 240 5% 95%;
+
+    /* Card variants */
+    --card: 240 8% 6%;
+    --card-foreground: 240 5% 95%;
+    --card-glass: 240 8% 6% / 0.8;
+
+    /* Popover */
+    --popover: 240 8% 6%;
+    --popover-foreground: 240 5% 95%;
+
+    /* Primary purple theme */
+    --primary: 260 85% 65%;
+    --primary-foreground: 240 5% 95%;
+    --primary-glow: 260 85% 75%;
+    --primary-dark: 260 85% 55%;
+
+    /* Secondary blue accent */
+    --secondary: 220 70% 60%;
+    --secondary-foreground: 240 5% 95%;
+    --secondary-glow: 220 70% 70%;
+
+    /* Muted variations */
+    --muted: 240 6% 10%;
+    --muted-foreground: 240 5% 65%;
+
+    /* Accent colors */
+    --accent: 280 80% 70%;
+    --accent-foreground: 240 5% 95%;
+
+    /* Status colors */
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 240 5% 95%;
+    --success: 142 85% 60%;
+    --warning: 38 85% 60%;
+
+    /* UI elements */
+    --border: 240 6% 15%;
+    --input: 240 6% 10%;
+    --ring: 260 85% 65%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-hero: linear-gradient(135deg, hsl(260 85% 65%), hsl(220 70% 60%), hsl(280 80% 70%));
+    --gradient-card: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(240 8% 8%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(var(--card-glass)) 0%, hsl(240 8% 8% / 0.4) 100%);
+
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
+    --shadow-card: 0 10px 30px -10px hsl(240 10% 2% / 0.3);
+    --shadow-button: 0 4px 15px hsl(var(--primary) / 0.2);
+
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+
+  }
+
+  /* Custom utility classes for gradients and effects */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .gradient-glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border));
+  }
+
+  .glow-primary {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .card-shadow {
+    box-shadow: var(--shadow-card);
+  }
+
+  .button-shadow {
+    box-shadow: var(--shadow-button);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+ 
+          /* Header styles */
+        header {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 100; 
+            background-color: rgba(10, 10, 10, 0.8); 
+            backdrop-filter: blur(10px); 
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .header-container {
+            width: 90%; 
+            max-width: 1280px; 
+            margin-left: auto; 
+            margin-right: auto;
+        }
+        
+        .header-inner {
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            height: 4rem;
+        }
+        
+        .logo-link {
+            text-decoration: none;
+        }
+        
+        .logo-link img {
+            height: 2.5rem; 
+            width: auto; 
+            display: block;
+        }
+        
+        /* Hamburger button */
+        .nav-toggle {
+            display: none;
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            font-size: 1.5rem; 
+            color: white;
+            padding: 0.5rem;
+        }
+        
+        /* Desktop navigation */
+        .desktop-nav { 
+            display: flex; 
+            gap: 1.5rem;
+        }
+
+        /* Nav link styles (added for underline effect and active state) */
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;   /* increase size */
+            gap: 2rem;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--accent-cyan);
+        }
+        
+        /* Mobile navigation */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            .desktop-nav {
+                position: absolute;
+                top: 100%; /* Position below header */
+                right: 5%; /* Align with header padding */
+                background-color: #131618; /* Dark background for mobile */
+                border: 1px solid var(--border-color);
+                border-radius: 4px;
+                flex-direction: column;
+                width: auto;
+                min-width: 150px;
+                padding: 0.5rem 1rem;
+                display: none; /* Hidden by default */
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                z-index: 110; /* Higher than header */
+            }
+            
+            .desktop-nav.show {
+                display: flex;
+            }
+            
+            .nav-link {
+                padding: 0.75rem 0;
+                margin: 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                color: var(--text-primary); /* Adjusted for contrast */
+            }
+            
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-link::after {
+                display: none; /* Remove underline effect on mobile */
+            }
+
+            .nav-link.active {
+                color: var(--accent-cyan);
+                border-bottom-color: var(--accent-cyan);
+            }
+        }
+
+        /* ===== Footer Styling (Same as Main Website) ===== */
+footer {
+  background-color: #000;
+  color: white;
+  padding: 4rem 1rem;
+  border-top: 1px solid #1e1e1e;
+  font-family: 'Poppins', sans-serif;
+}
+
+footer .footer-container {
+  width: 90%;
+  max-width: 1280px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  text-align: left;
+}
+
+footer img {
+  height: 2rem;
+  width: auto;
+  margin-bottom: 1rem;
+}
+
+footer p {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+footer h3 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #007bff;
+}
+
+footer svg {
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+footer .footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #1e1e1e;
+}
+
+footer .footer-bottom p {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+}
+
+/* Make footer headings distinct on mobile */
+footer h4,
+footer h5 {
+  font-weight: 700;
+  color: #00aaff;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+/* Make links and text more readable */
+footer p,
+footer a,
+footer li {
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #00c6ff;
+}
+
+/* Add spacing and alignment on smaller screens */
+@media (max-width: 768px) {
+  footer {
+    text-align: center;
+    padding: 20px 10px;
+  }
+
+  footer .footer-column {
+    margin-bottom: 20px;
+  }
+}
+
+
